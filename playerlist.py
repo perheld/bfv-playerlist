@@ -1,5 +1,7 @@
 from lib import BFV
+import requests
 import time
+import json
 
 
 if __name__ == "__main__":
@@ -12,7 +14,8 @@ if __name__ == "__main__":
         exit(1)
     print("[+] BFV.exe found, Handle 0x%x" % phandle)
     cnt = 0
-        
+    headers = {'Accept': 'application/json'}
+
     while True:
         BFV.process(phandle, cnt, 0x8)
         cnt += 1
@@ -23,6 +26,15 @@ if __name__ == "__main__":
         print("-" * 20)
         for s in data.soldiers:
             if isinstance(s.name, str):
-                print("https://bfvhackers.com/?name=" + s.name)
+                r = requests.get('https://bfvhackers.com/api/v1/is-hacker?name=' + s.name + '&stats=false', headers=headers)
 
-        time.sleep(5)
+                # if its not OK just continue on with the others, possibly we are ratelimited
+                if r.status_code != 200:
+                    continue
+
+                json_data = json.loads(r.text)
+
+                if json_data['hack_level'] != "legit":
+                    print("https://bfvhackers.com/?name=" + s.name + ": " + json_data['hack_level'])
+
+        time.sleep(10)
