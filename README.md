@@ -8,3 +8,6 @@
 
 #### Future:
  - Automatically check players using the bfvhackers API and get green/red text if there are bad players
+
+#### What does it look like?
+![Screenshot](screenshot.png)
