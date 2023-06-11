@@ -14,3 +14,6 @@ I got sick and tired of always discovering that cheaters are in the game when it
 
 #### What does it look like?
 ![Screenshot](screenshot.png)
+
+#### Warning
+I dont take any responsibility for your account being banned by using this. Since at its core its about reading memory from the BFV process and that is the same procedures at aimbots use fairplay might think this is bad. I dont know. I have been using this for a while and will probably continue in doing so.
