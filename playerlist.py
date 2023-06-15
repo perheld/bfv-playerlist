@@ -13,6 +13,7 @@ if __name__ == "__main__":
         print("[-] Error: Cannot find BFV.exe")
         exit(1)
     print("[+] BFV.exe found, Handle 0x%x" % phandle)
+
     cnt = 0
     headers = {'Accept': 'application/json'}
 
@@ -21,18 +22,27 @@ if __name__ == "__main__":
         cnt += 1
 
         data = BFV.gamedata
+
         if not data.soldiers:
             continue
+
         print("-" * 20)
+
         for s in data.soldiers:
             if isinstance(s.name, str):
-                r = requests.get('https://bfvhackers.com/api/v1/is-hacker?name=' + s.name + '&stats=false', headers=headers)
+                try:
+                    r = requests.get('https://bfvhackers.com/api/v1/is-hacker?name=' + s.name + '&stats=false', headers=headers)
+                except Exception as e:
+                    continue
 
                 # if its not OK just continue on with the others, possibly we are ratelimited
                 if r.status_code != 200:
                     continue
 
                 json_data = json.loads(r.text)
+
+                if not json_data['hack_level']:
+                    continue
 
                 if json_data['hack_level'] != "legit":
                     print("https://bfvhackers.com/?name=" + s.name + ": " + json_data['hack_level'])
