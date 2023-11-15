@@ -42,8 +42,7 @@ if __name__ == "__main__":
                     if not json_data['hack_level']:
                         continue
 
-                    if json_data['hack_level'] != "legit":
-                        print("https://bfvhackers.com/?name=" + s.name + ": " + json_data['hack_level'])
+                    print("https://bfvhackers.com/?name=" + s.name + ": " + json_data['hack_level'])
         except Exception as e:
             continue
 
