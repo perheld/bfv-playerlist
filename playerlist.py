@@ -27,6 +27,8 @@ if __name__ == "__main__":
             if not data.soldiers:
                 continue
 
+            time.sleep(10)
+
             print("-" * 20)
 
             for s in data.soldiers:
@@ -45,5 +47,3 @@ if __name__ == "__main__":
                     print("https://bfvhackers.com/?name=" + s.name + ": " + json_data['hack_level'])
         except Exception as e:
             continue
-
-        time.sleep(10)
