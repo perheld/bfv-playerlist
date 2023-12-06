@@ -17,8 +17,18 @@ if __name__ == "__main__":
     cnt = 0
     headers = {'Accept': 'application/json'}
 
+    players = {}
+
     while True:
+        time.sleep(10)
+
+        with open("listofplayers.txt", 'w') as f:  
+            for key, value in players.items():  
+                f.write('%s\n' % (key))
+
         try:
+            print("-" * 20)
+
             BFV.process(phandle, cnt, 0x8)
             cnt += 1
 
@@ -27,12 +37,10 @@ if __name__ == "__main__":
             if not data.soldiers:
                 continue
 
-            time.sleep(10)
-
-            print("-" * 20)
-
             for s in data.soldiers:
                 if isinstance(s.name, str):
                     print(s.name)
+                    players[s.name] = s.name
+
         except Exception as e:
             continue
